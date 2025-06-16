@@ -15,75 +15,83 @@
         /* 기본 글꼴 및 배경색 설정 */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FFFFFF; /* Pure white background */
-            color: #1a202c; /* text-gray-900 equivalent */
+            background-color: #FFFFFF; /* 순수한 흰색 배경 */
+            color: #1a202c; /* text-gray-900과 동일 */
             line-height: 1.6;
         }
 
         /* 섹션 제목 스타일 (Apple style: bold, spacious, minimal underline) */
         .section-heading {
-            font-size: 3.5rem; /* Larger than before, text-5xl equivalent */
-            font-weight: 800; /* Extra bold for impact */
-            color: #1a202c; /* Dark text on light background */
+            font-size: 3.5rem; /* 이전보다 크게, text-5xl과 동일 */
+            font-weight: 800; /* 임팩트를 위한 매우 굵은 글꼴 */
+            color: #1a202c; /* 밝은 배경에 어두운 텍스트 */
             text-align: center;
-            margin-bottom: 4rem; /* More space */
-            letter-spacing: -0.02em; /* Tighter letter spacing for headings */
+            margin-bottom: 4rem; /* 여백 증가 */
+            letter-spacing: -0.02em; /* 제목 글자 간격 좁게 */
         }
         @media (max-width: 768px) {
             .section-heading {
-                font-size: 2.5rem; /* Smaller on mobile */
+                font-size: 2.5rem; /* 모바일에서 작게 */
                 margin-bottom: 2rem;
             }
         }
 
-
-        /* Hero section background image and overlay */
+        /* 히어로 섹션 배경 이미지 및 오버레이 */
         header {
             /* 이미지가 로드되지 않을 경우를 대비한 대체 배경색 (검정색) */
             background-color: #000000;
         }
         .hero-background {
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Parallax effect */
+            background-size: cover; /* 배경 이미지를 요소에 맞게 확대/축소 */
+            background-position: center; /* 배경 이미지 중앙 정렬 */
+            background-attachment: fixed; /* 시차 효과(parallax effect) */
         }
         .hero-overlay {
             /* 헤더 이미지를 투명하게 만들어 글자가 돋보이게 함 (오버레이 불투명도 60%) */
-            background: rgba(0, 0, 0, 0.6); /* Adjusted for better visibility */
+            background: rgba(0, 0, 0, 0.6); /* 가시성 향상을 위해 조정 */
         }
-        /* 모바일 헤더 높이 조정 */
+        /* 모바일 헤더 높이 및 오버레이 투명도 조정 */
         @media (max-width: 768px) {
             header {
-                padding-top: 10rem;
-                padding-bottom: 10rem;
+                padding-top: 4rem; /* 10rem에서 4rem으로 변경하여 높이 더 줄임 */
+                padding-bottom: 4rem; /* 10rem에서 4rem으로 변경하여 높이 더 줄임 */
             }
             header h1 {
-                font-size: 3.5rem; /* Adjust title size for mobile */
+                font-size: 3.5rem; /* 모바일 제목 크기 조정 */
             }
             header p {
-                font-size: 1.5rem; /* Adjust subtitle size for mobile */
+                font-size: 1.5rem; /* 모바일 부제목 크기 조정 */
+            }
+            .hero-overlay {
+                background: rgba(0, 0, 0, 0.3); /* 모바일에서 투명도 더 낮춤 */
             }
         }
 
+        /* 내비게이션 바 스크롤 효과 (제거됨) */
+        /* .navbar-scrolled {
+            background-color: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        } */
 
-
-        /* Call to action button style */
+        /* 콜투액션 버튼 스타일 */
         .cta-button {
             background-color: #3182CE; /* blue-500 */
             color: white;
-            font-weight: 600; /* Semibold */
-            padding: 1.25rem 2.5rem; /* Larger padding */
-            border-radius: 9999px; /* Fully rounded */
-            transition: all 0.3s ease;
-            transform: translateY(0); /* For subtle hover effect */
+            font-weight: 600; /* 세미볼드 */
+            padding: 1.25rem 2.5rem; /* 더 큰 패딩 */
+            border-radius: 9999px; /* 완전히 둥근 모서리 */
+            transition: all 0.3s ease; /* 부드러운 호버 효과를 위한 전환 */
+            transform: translateY(0); /* 미묘한 호버 효과를 위해 */
         }
         .cta-button:hover {
-            background-color: #2b6cb0; /* Darker blue on hover */
-            transform: translateY(-2px); /* Slight lift */
+            background-color: #2b6cb0; /* 호버 시 더 어두운 파란색 */
+            transform: translateY(-2px); /* 약간 위로 들어 올림 */
             box-shadow: 0 4px 15px rgba(49, 130, 206, 0.3);
         }
 
-        /* General fade-in animation for sections */
+        /* 섹션별 페이드인 애니메이션 */
         @keyframes fade-in-up {
             from {
                 opacity: 0;
@@ -96,11 +104,11 @@
         }
         .animate-fade-in-on-scroll {
             animation: fade-in-up 0.8s ease-out forwards;
-            opacity: 0; /* Hidden by default */
+            opacity: 0; /* 기본적으로 숨김 */
         }
-        /* HR element specific style to remove default browser border */
+        /* HR 요소 기본 브라우저 테두리 제거 */
         hr {
-            border: none; /* Removes default 3D border */
+            border: none; /* 기본 3D 테두리 제거 */
         }
 
         /* 모바일 메뉴 스타일 (숨김 처리) */
@@ -110,14 +118,14 @@
             width: 100%;
             background-color: rgba(255, 255, 255, 0.95);
             position: absolute;
-            top: 100%; /* 네비게이션 바 바로 아래 */
+            top: 100%; /* 내비게이션 바 바로 아래 */
             left: 0;
             padding: 1rem 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .mobile-menu a {
             padding: 0.75rem 1.5rem;
-            color: #1a202c; /* Dark text for mobile menu */
+            color: #1a202c; /* 모바일 메뉴용 어두운 텍스트 */
             font-weight: 500;
             text-align: center;
         }
@@ -128,16 +136,16 @@
 </head>
 <body class="antialiased">
     <div class="min-h-screen flex flex-col">
-        <!-- Header Section (Hero) -->
-        <header class="w-full relative py-32 lg:py-32 text-white flex items-center justify-center overflow-hidden hero-background"
+        <!-- 헤더 섹션 (히어로) -->
+        <header class="w-full relative py-64 lg:py-80 text-white flex items-center justify-center overflow-hidden hero-background"
             style="background-image: url('image_head.png');"
             onerror="this.style.backgroundImage='url(https://placehold.co/1920x1080/000000/FFFFFF?text=Electrochemistry+School+Hero_Fallback)';">
             <div class="absolute inset-0 hero-overlay"></div>
             <div class="container mx-auto px-6 text-center relative z-10">
-                <h1 class="text-5xl lg:text-6xl font-extrabold tracking-tighter mb-8 leading-tight opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.2s;">전기화학학교</h1>
+                <h1 class="text-7xl lg:text-8xl font-extrabold tracking-tighter mb-8 leading-tight opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.2s;">전기화학학교</h1>
                 <!-- 요청에 따라 가로선 추가 -->
                 <hr class="w-56 h-1 bg-amber-500 mx-auto mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.3s;">
-                <p class="text-1xl lg:text-2xl font-normal text-amber-500 mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.4s;">미래를 여는 전기화학의 모든 것</p>
+                <p class="text-3xl lg:text-4xl font-normal text-amber-500 mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.4s;">미래를 여는 전기화학의 모든 것</p>
                 <div class="mt-12 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.6s;">
                     <a href="#overview" class="cta-button">
                         강의 내용 살펴보기
@@ -146,17 +154,17 @@
             </div>
         </header>
 
-        <!-- Navigation Bar -->
-        <nav id="navbar" class="w-full bg-blue-900 fixed top-0 left-0 z-10 transition-all duration-300">
-            <div class="container mx-auto px-6 flex justify-between items-center py-2">
-                <div class="text-2xl font-bold text-white transition-colors duration-300">전기화학학교</div>
+        <!-- 내비게이션 바 -->
+        <nav id="navbar" class="w-full bg-blue-900 fixed top-0 left-0 z-50 transition-all duration-300">
+            <div class="container mx-auto px-6 flex justify-between items-center py-2"> <!-- 높이를 줄이기 위해 py-4로 변경 -->
+                <div class="text-2xl font-bold text-white">전기화학학교</div> <!-- 항상 흰색 텍스트 -->
                 <!-- 데스크톱 메뉴: 모바일에서 숨김, md 이상에서 flex -->
                 <div class="desktop-menu flex gap-8 hidden md:flex">
-                    <a href="#overview" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">수업 개요</a>
-                    <a href="#dates" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">수업 일자</a>
-                    <a href="#program" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강의 프로그램</a>
-                    <a href="#quiz" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">질문지 작성</a>
-                    <a href="#instructors" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강사진</a>
+                    <a href="#overview" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">수업 개요</a> <!-- 항상 흰색 텍스트 -->
+                    <a href="#dates" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">수업 일자</a> <!-- 항상 흰색 텍스트 -->
+                    <a href="#program" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강의 프로그램</a> <!-- 항상 흰색 텍스트 -->
+                    <a href="#quiz" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">질문지 작성</a> <!-- 항상 흰색 텍스트 -->
+                    <a href="#instructors" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강사진</a> <!-- 항상 흰색 텍스트 -->
                 </div>
                 <!-- 햄버거 메뉴 아이콘: md 이상에서 숨김, 모바일에서 블록 표시 -->
                 <button class="hamburger-menu block md:hidden text-white text-2xl focus:outline-none" aria-label="Toggle navigation" id="hamburger-button">
@@ -174,10 +182,10 @@
         </nav>
 
         <main class="flex-grow w-full max-w-7xl mx-auto px-6 py-24">
-            <!-- Fixed Navbar 때문에 content가 navbar 아래로 가려지지 않도록 padding-top 추가 -->
+            <!-- 고정된 내비게이션 바 때문에 콘텐츠가 가려지지 않도록 상단 패딩 추가 -->
             <div class="pt-24 md:pt-16"></div> 
 
-            <!-- 수업 개요 Section -->
+            <!-- 수업 개요 섹션 -->
             <section id="overview" class="mb-32 opacity-0 animate-fade-in-on-scroll">
                 <h2 class="section-heading">수업 개요</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
@@ -202,7 +210,7 @@
                 </div>
             </section>
 
-            <!-- 수업 일자 공고 Section -->
+            <!-- 수업 일자 공고 섹션 -->
             <section id="dates" class="mb-32 opacity-0 animate-fade-in-on-scroll">
                 <h2 class="section-heading">수업 일자</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -239,7 +247,7 @@
                 </div>
             </section>
 
-            <!-- 강의 프로그램 Section -->
+            <!-- 강의 프로그램 섹션 -->
             <section id="program" class="mb-32 opacity-0 animate-fade-in-on-scroll">
                 <h2 class="section-heading">강의 프로그램</h2>
                 <div class="grid grid-cols-1 gap-10"> <!-- 항상 수직으로 배치 -->
@@ -318,7 +326,7 @@
                 </div>
             </section>
 
-            <!-- 설문지 접수 Section -->
+            <!-- 설문지 접수 섹션 -->
             <section id="quiz" class="mb-32 opacity-0 animate-fade-in-on-scroll">
                 <h2 class="section-heading">질문지 작성</h2>
                 <div class="text-center max-w-4xl mx-auto mb-16">
@@ -350,46 +358,46 @@
                 </div>
             </section>
 
-            <!-- 강사진 Section -->
+            <!-- 강사진 섹션 -->
             <section id="instructors" class="mb-32 opacity-0 animate-fade-in-on-scroll">
                 <h2 class="section-heading">강사진</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-                    <!-- Instructor 1 -->
+                    <!-- 강사 1 -->
                     <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="prof1.png" alt="정택동 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
                             onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사1_Fallback';">
                         <h3 class="text-3xl font-bold text-gray-900 mb-2">정택동</h3>
                         <p class="text-center text-gray-700 text-lg">서울대학교 화학부 교수</p>
                     </div>
-                    <!-- Instructor 2 -->
+                    <!-- 강사 2 -->
                     <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="prof2.png" alt="양해식 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
                             onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사2_Fallback';">
                         <h3 class="text-3xl font-bold text-gray-900 mb-2">양해식</h3>
                         <p class="text-center text-gray-700 text-lg">부산대학교 화학과 교수</p>
                     </div>
-                    <!-- Instructor 3 -->
+                    <!-- 강사 3 -->
                     <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="prof3.png" alt="김종원 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
                             onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사3_Fallback';">
                         <h3 class="text-3xl font-bold text-gray-900 mb-2">김종원</h3>
                         <p class="text-center text-gray-700 text-lg">충북대학교 화학과 교수</p>
                     </div>
-                    <!-- Instructor 4 -->
+                    <!-- 강사 4 -->
                     <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="prof4.png" alt="이호춘 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
                             onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사4_Fallback';">
                         <h3 class="text-3xl font-bold text-gray-900 mb-2">이호춘</h3>
                         <p class="text-center text-gray-700 text-lg">DGIST 에너지공학과 교수</p>
                     </div>
-                    <!-- Instructor 5 -->
+                    <!-- 강사 5 -->
                     <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="prof5.png" alt="장병용 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
                             onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사5_Fallback';">
                         <h3 class="text-3xl font-bold text-gray-900 mb-2">장병용</h3>
                         <p class="text-center text-gray-700 text-lg">부경대학교 화학과 교수</p>
                     </div>
-                    <!-- Instructor 6 -->
+                    <!-- 강사 6 -->
                     <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="prof6.png" alt="황성필 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
                             onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사6_Fallback';">
@@ -401,7 +409,7 @@
 
         </main>
 
-        <!-- Footer -->
+        <!-- 푸터 -->
         <footer class="w-full bg-gray-50 text-gray-600 py-12 mt-20 border-t border-gray-100">
             <div class="container mx-auto px-6 text-center text-base">
                 <p>&copy; 2015 전기화학학교. 모든 권리 보유.</p>
@@ -411,7 +419,7 @@
     </div>
 
     <script>
-        // Smooth scroll for navigation
+        // 내비게이션 바 부드러운 스크롤
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -426,108 +434,95 @@
             });
         });
 
-        // Navbar visibility and style change on scroll
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const navTitle = navbar.querySelector('div:first-child');
-            // 데스크톱 메뉴 링크는 'desktop-menu' 안에 있으므로 이젠 별도 선택 불필요
-            // 모바일 메뉴 링크는 'mobile-menu' 안에 있으므로 아래에서 별도로 처리
-            const hamburgerButton = document.getElementById('hamburger-button');
+        // 스크롤 시 내비게이션 바 효과 제거: 이벤트 리스너 제거
+        // window.addEventListener('scroll', function() {
+        //     const navbar = document.getElementById('navbar');
+        //     const navTitle = navbar.querySelector('div:first-child');
+        //     const hamburgerButton = document.getElementById('hamburger-button');
+
+        //     if (window.scrollY > 100) {
+        //         navbar.classList.add('navbar-scrolled');
+        //         navTitle.classList.replace('text-white', 'text-gray-900');
+        //         navbar.querySelectorAll('.desktop-menu a').forEach(link => {
+        //             link.classList.replace('text-white', 'text-gray-700');
+        //             link.classList.replace('hover:text-blue-300', 'hover:text-blue-600');
+        //         });
+        //         hamburgerButton.classList.replace('text-white', 'text-gray-700');
+        //     } else {
+        //         navbar.classList.remove('navbar-scrolled');
+        //         navTitle.classList.replace('text-gray-900', 'text-white');
+        //         navbar.querySelectorAll('.desktop-menu a').forEach(link => {
+        //             link.classList.replace('text-gray-700', 'text-white');
+        //             link.classList.replace('hover:text-blue-600', 'hover:text-blue-300');
+        //         });
+        //         hamburgerButton.classList.replace('text-gray-700', 'text-white');
+        //     }
+
+        //     const mobileMenu = document.getElementById('mobile-menu');
+        //     if (mobileMenu.classList.contains('active')) {
+        //         navTitle.classList.replace('text-white', 'text-gray-900');
+        //         hamburgerButton.classList.replace('text-white', 'text-gray-700');
+        //     }
+        // });
 
 
-            if (window.scrollY > 100) { // When scrolled down
-                navbar.classList.add('navbar-scrolled');
-                // 내비게이션 바 제목 색상 변경
-                navTitle.classList.replace('text-white', 'text-gray-900');
-                // 햄버거 메뉴 아이콘 색상 변경
-                hamburgerButton.classList.replace('text-white', 'text-gray-700');
-
-                // 모바일 메뉴가 열려있을 때만 링크 색상 변경 (모바일 메뉴는 이미 어두운 텍스트)
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenu.classList.contains('active')) {
-                     const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-                     mobileMenuLinks.forEach(link => link.classList.remove('text-white'));
-                }
-
-
-            } else { // At the top
-                navbar.classList.remove('navbar-scrolled');
-                // 내비게이션 바 제목 색상 원래대로
-                navTitle.classList.replace('text-gray-900', 'text-white');
-                // 햄버거 메뉴 아이콘 색상 원래대로
-                hamburgerButton.classList.replace('text-gray-700', 'text-white');
-
-                // 모바일 메뉴가 열려있을 때만 링크 색상 변경 (모바일 메뉴도 다시 흰색으로)
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenu.classList.contains('active')) {
-                    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-                    mobileMenuLinks.forEach(link => link.classList.add('text-white'));
-                }
-            }
-        });
-
-        // Intersection Observer for fade-in animations
+        // 섹션 페이드인 애니메이션을 위한 Intersection Observer
         const sections = document.querySelectorAll('section.animate-fade-in-on-scroll');
-        // Hero section 내 애니메이션 적용 요소들을 선택
+        // 히어로 섹션 내 애니메이션 적용 요소들을 선택
         const heroElements = document.querySelectorAll('header .container > *:not(.cta-button)'); // CTA 버튼 제외
 
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.1 // Trigger when 10% of the element is visible
+            threshold: 0.1 // 요소의 10%가 보일 때 트리거
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.animationPlayState = 'running';
-                    observer.unobserve(entry.target); // Stop observing once animated
+                    observer.unobserve(entry.target); // 한 번 애니메이션 후 관찰 중단
                 }
             });
         }, observerOptions);
 
-        // Observe main sections
+        // 메인 섹션 관찰
         sections.forEach(section => {
-            section.style.animationPlayState = 'paused'; // Pause animation initially
+            section.style.animationPlayState = 'paused'; // 초기 애니메이션 일시 정지
             observer.observe(section);
         });
 
-        // Observe hero section elements (these start visible, then animate)
+        // 히어로 섹션 요소 관찰 (이것들은 처음에 보였다가 애니메이션됨)
         heroElements.forEach(element => {
             element.style.animationPlayState = 'paused';
-            element.classList.add('animate-fade-in-on-scroll'); // Ensure animation class is added
+            element.classList.add('animate-fade-in-on-scroll'); // 애니메이션 클래스 추가 확인
         });
 
-        // Trigger hero animations directly on load for a smoother first impression
+        // 페이지 로드 시 히어로 애니메이션 직접 트리거 (더 부드러운 첫인상)
         window.addEventListener('load', () => {
             heroElements.forEach(element => {
                 element.style.animationPlayState = 'running';
             });
         });
 
-        // Hamburger menu functionality
+        // 햄버거 메뉴 기능
         document.getElementById('hamburger-button').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('active');
-            // 모바일 메뉴가 열리거나 닫힐 때 내비게이션 바의 스크롤 상태에 따라 링크 색상 조정
+
+            // 모바일 메뉴가 열리거나 닫힐 때 내비게이션 바 제목과 햄버거 아이콘 색상 조정
             const navTitle = document.querySelector('#navbar div:first-child');
             const hamburgerButton = document.getElementById('hamburger-button');
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
 
-            if (mobileMenu.classList.contains('active') && window.scrollY <= 100) {
-                // 메뉴가 열렸고 스크롤이 상단일 때: 모바일 메뉴 링크를 어둡게
-                mobileMenuLinks.forEach(link => link.classList.remove('text-white'));
-                // 햄버거 버튼도 어둡게
-                hamburgerButton.classList.replace('text-white', 'text-gray-700');
+            // 모바일 메뉴가 열리면 제목과 햄버거 아이콘이 어두운 색으로 변하도록 유지
+            if (mobileMenu.classList.contains('active')) {
                 navTitle.classList.replace('text-white', 'text-gray-900');
-            } else if (!mobileMenu.classList.contains('active') && window.scrollY <= 100) {
-                // 메뉴가 닫혔고 스크롤이 상단일 때: 모바일 메뉴 링크를 다시 흰색으로
-                mobileMenuLinks.forEach(link => link.classList.add('text-white'));
-                // 햄버거 버튼도 흰색으로
-                hamburgerButton.classList.replace('text-gray-700', 'text-white');
+                hamburgerButton.classList.replace('text-white', 'text-gray-700');
+            } else {
+                // 모바일 메뉴가 닫히면 항상 흰색으로 복귀 (스크롤 효과 제거에 따라 변경)
                 navTitle.classList.replace('text-gray-900', 'text-white');
+                hamburgerButton.classList.replace('text-gray-700', 'text-white');
             }
-            // 스크롤된 상태에서는 이미 navbar-scrolled에 의해 색상이 결정되므로 별도 처리 불필요
         });
     </script>
 </body>
