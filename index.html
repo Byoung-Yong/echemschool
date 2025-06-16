@@ -65,13 +65,7 @@
             }
         }
 
-        /* Navbar on scroll effect */
-        .navbar-scrolled {
-            background-color: rgba(255, 255, 255, 0.98); /* Near opaque white */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Very subtle shadow */
-            padding-top: 0.75rem; /* Slightly smaller on scroll */
-            padding-bottom: 0.75rem;
-        }
+
 
         /* Call to action button style */
         .cta-button {
@@ -130,38 +124,20 @@
         .mobile-menu.active {
             display: flex;
         }
-
-        /* 데스크톱 메뉴 숨기기 및 햄버거 아이콘 표시 */
-        @media (max-width: 768px) {
-            .desktop-menu {
-                display: none;
-            }
-            .hamburger-menu {
-                display: block;
-            }
-        }
-        @media (min-width: 769px) {
-            .desktop-menu {
-                display: flex;
-            }
-            .hamburger-menu {
-                display: none;
-            }
-        }
     </style>
 </head>
 <body class="antialiased">
     <div class="min-h-screen flex flex-col">
         <!-- Header Section (Hero) -->
-        <header class="w-full relative py-64 lg:py-80 text-white flex items-center justify-center overflow-hidden hero-background"
-            style="background-image: url('image_head.jpg');"
+        <header class="w-full relative py-32 lg:py-32 text-white flex items-center justify-center overflow-hidden hero-background"
+            style="background-image: url('image_head.png');"
             onerror="this.style.backgroundImage='url(https://placehold.co/1920x1080/000000/FFFFFF?text=Electrochemistry+School+Hero_Fallback)';">
             <div class="absolute inset-0 hero-overlay"></div>
             <div class="container mx-auto px-6 text-center relative z-10">
-                <h1 class="text-7xl lg:text-8xl font-extrabold tracking-tighter mb-8 leading-tight opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.2s;">전기화학학교</h1>
+                <h1 class="text-5xl lg:text-6xl font-extrabold tracking-tighter mb-8 leading-tight opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.2s;">전기화학학교</h1>
                 <!-- 요청에 따라 가로선 추가 -->
                 <hr class="w-56 h-1 bg-amber-500 mx-auto mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.3s;">
-                <p class="text-3xl lg:text-4xl font-normal text-amber-500 mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.4s;">미래를 여는 전기화학의 모든 것</p>
+                <p class="text-1xl lg:text-2xl font-normal text-amber-500 mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.4s;">미래를 여는 전기화학의 모든 것</p>
                 <div class="mt-12 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.6s;">
                     <a href="#overview" class="cta-button">
                         강의 내용 살펴보기
@@ -171,19 +147,19 @@
         </header>
 
         <!-- Navigation Bar -->
-        <nav id="navbar" class="w-full bg-transparent fixed top-0 left-0 z-50 transition-all duration-300">
-            <div class="container mx-auto px-6 flex justify-between items-center py-6">
+        <nav id="navbar" class="w-full bg-blue-900 fixed top-0 left-0 z-10 transition-all duration-300">
+            <div class="container mx-auto px-6 flex justify-between items-center py-2">
                 <div class="text-2xl font-bold text-white transition-colors duration-300">전기화학학교</div>
-                <!-- 데스크톱 메뉴 -->
-                <div class="desktop-menu flex gap-8">
+                <!-- 데스크톱 메뉴: 모바일에서 숨김, md 이상에서 flex -->
+                <div class="desktop-menu flex gap-8 hidden md:flex">
                     <a href="#overview" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">수업 개요</a>
                     <a href="#dates" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">수업 일자</a>
                     <a href="#program" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강의 프로그램</a>
                     <a href="#quiz" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">질문지 작성</a>
                     <a href="#instructors" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강사진</a>
                 </div>
-                <!-- 햄버거 메뉴 아이콘 (모바일에서만 표시) -->
-                <button class="hamburger-menu text-white text-2xl focus:outline-none" aria-label="Toggle navigation" id="hamburger-button">
+                <!-- 햄버거 메뉴 아이콘: md 이상에서 숨김, 모바일에서 블록 표시 -->
+                <button class="hamburger-menu block md:hidden text-white text-2xl focus:outline-none" aria-label="Toggle navigation" id="hamburger-button">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -453,31 +429,40 @@
         // Navbar visibility and style change on scroll
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
-            const navLinks = navbar.querySelectorAll('.desktop-menu a'); // 데스크톱 메뉴 링크
             const navTitle = navbar.querySelector('div:first-child');
-            const mobileMenuLinks = navbar.querySelectorAll('.mobile-menu a'); // 모바일 메뉴 링크
+            // 데스크톱 메뉴 링크는 'desktop-menu' 안에 있으므로 이젠 별도 선택 불필요
+            // 모바일 메뉴 링크는 'mobile-menu' 안에 있으므로 아래에서 별도로 처리
+            const hamburgerButton = document.getElementById('hamburger-button');
+
 
             if (window.scrollY > 100) { // When scrolled down
                 navbar.classList.add('navbar-scrolled');
-                // Change text color to dark for desktop and mobile links
-                navLinks.forEach(link => link.classList.replace('text-white', 'text-gray-700'));
-                mobileMenuLinks.forEach(link => link.classList.remove('text-white')); // 모바일 메뉴는 이미 어두운 텍스트
+                // 내비게이션 바 제목 색상 변경
                 navTitle.classList.replace('text-white', 'text-gray-900');
-                navLinks.forEach(link => link.classList.replace('hover:text-blue-300', 'hover:text-blue-600'));
-
                 // 햄버거 메뉴 아이콘 색상 변경
-                document.getElementById('hamburger-button').classList.replace('text-white', 'text-gray-700');
+                hamburgerButton.classList.replace('text-white', 'text-gray-700');
+
+                // 모바일 메뉴가 열려있을 때만 링크 색상 변경 (모바일 메뉴는 이미 어두운 텍스트)
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu.classList.contains('active')) {
+                     const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+                     mobileMenuLinks.forEach(link => link.classList.remove('text-white'));
+                }
+
 
             } else { // At the top
                 navbar.classList.remove('navbar-scrolled');
-                // Change text color back to white for desktop and mobile links
-                navLinks.forEach(link => link.classList.replace('text-gray-700', 'text-white'));
-                mobileMenuLinks.forEach(link => link.classList.add('text-white')); // 모바일 메뉴도 다시 흰색으로
+                // 내비게이션 바 제목 색상 원래대로
                 navTitle.classList.replace('text-gray-900', 'text-white');
-                navLinks.forEach(link => link.classList.replace('hover:text-blue-600', 'hover:text-blue-300'));
+                // 햄버거 메뉴 아이콘 색상 원래대로
+                hamburgerButton.classList.replace('text-gray-700', 'text-white');
 
-                // 햄버거 메뉴 아이콘 색상 변경
-                document.getElementById('hamburger-button').classList.replace('text-gray-700', 'text-white');
+                // 모바일 메뉴가 열려있을 때만 링크 색상 변경 (모바일 메뉴도 다시 흰색으로)
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu.classList.contains('active')) {
+                    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+                    mobileMenuLinks.forEach(link => link.classList.add('text-white'));
+                }
             }
         });
 
@@ -524,6 +509,25 @@
         document.getElementById('hamburger-button').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('active');
+            // 모바일 메뉴가 열리거나 닫힐 때 내비게이션 바의 스크롤 상태에 따라 링크 색상 조정
+            const navTitle = document.querySelector('#navbar div:first-child');
+            const hamburgerButton = document.getElementById('hamburger-button');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            if (mobileMenu.classList.contains('active') && window.scrollY <= 100) {
+                // 메뉴가 열렸고 스크롤이 상단일 때: 모바일 메뉴 링크를 어둡게
+                mobileMenuLinks.forEach(link => link.classList.remove('text-white'));
+                // 햄버거 버튼도 어둡게
+                hamburgerButton.classList.replace('text-white', 'text-gray-700');
+                navTitle.classList.replace('text-white', 'text-gray-900');
+            } else if (!mobileMenu.classList.contains('active') && window.scrollY <= 100) {
+                // 메뉴가 닫혔고 스크롤이 상단일 때: 모바일 메뉴 링크를 다시 흰색으로
+                mobileMenuLinks.forEach(link => link.classList.add('text-white'));
+                // 햄버거 버튼도 흰색으로
+                hamburgerButton.classList.replace('text-gray-700', 'text-white');
+                navTitle.classList.replace('text-gray-900', 'text-white');
+            }
+            // 스크롤된 상태에서는 이미 navbar-scrolled에 의해 색상이 결정되므로 별도 처리 불필요
         });
     </script>
 </body>
