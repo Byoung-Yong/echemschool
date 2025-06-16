@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter Font from Google Fonts for a clean, modern feel -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for hamburger icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         /* 기본 글꼴 및 배경색 설정 */
@@ -27,6 +29,13 @@
             margin-bottom: 4rem; /* More space */
             letter-spacing: -0.02em; /* Tighter letter spacing for headings */
         }
+        @media (max-width: 768px) {
+            .section-heading {
+                font-size: 2.5rem; /* Smaller on mobile */
+                margin-bottom: 2rem;
+            }
+        }
+
 
         /* Hero section background image and overlay */
         header {
@@ -37,11 +46,23 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed; /* Parallax effect */
-            opacity: 0.7; /* 50% transparency applied here */
         }
         .hero-overlay {
             /* 헤더 이미지를 투명하게 만들어 글자가 돋보이게 함 (오버레이 불투명도 60%) */
             background: rgba(0, 0, 0, 0.6); /* Adjusted for better visibility */
+        }
+        /* 모바일 헤더 높이 조정 */
+        @media (max-width: 768px) {
+            header {
+                padding-top: 10rem;
+                padding-bottom: 10rem;
+            }
+            header h1 {
+                font-size: 3.5rem; /* Adjust title size for mobile */
+            }
+            header p {
+                font-size: 1.5rem; /* Adjust subtitle size for mobile */
+            }
         }
 
         /* Navbar on scroll effect */
@@ -87,12 +108,52 @@
         hr {
             border: none; /* Removes default 3D border */
         }
+
+        /* 모바일 메뉴 스타일 (숨김 처리) */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            position: absolute;
+            top: 100%; /* 네비게이션 바 바로 아래 */
+            left: 0;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .mobile-menu a {
+            padding: 0.75rem 1.5rem;
+            color: #1a202c; /* Dark text for mobile menu */
+            font-weight: 500;
+            text-align: center;
+        }
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* 데스크톱 메뉴 숨기기 및 햄버거 아이콘 표시 */
+        @media (max-width: 768px) {
+            .desktop-menu {
+                display: none;
+            }
+            .hamburger-menu {
+                display: block;
+            }
+        }
+        @media (min-width: 769px) {
+            .desktop-menu {
+                display: flex;
+            }
+            .hamburger-menu {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
     <div class="min-h-screen flex flex-col">
         <!-- Header Section (Hero) -->
-        <header class="w-full relative py-32 lg:py-30 text-white flex items-center justify-center overflow-hidden hero-background"
+        <header class="w-full relative py-64 lg:py-80 text-white flex items-center justify-center overflow-hidden hero-background"
             style="background-image: url('image_head.jpg');"
             onerror="this.style.backgroundImage='url(https://placehold.co/1920x1080/000000/FFFFFF?text=Electrochemistry+School+Hero_Fallback)';">
             <div class="absolute inset-0 hero-overlay"></div>
@@ -100,7 +161,7 @@
                 <h1 class="text-7xl lg:text-8xl font-extrabold tracking-tighter mb-8 leading-tight opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.2s;">전기화학학교</h1>
                 <!-- 요청에 따라 가로선 추가 -->
                 <hr class="w-56 h-1 bg-amber-500 mx-auto mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.3s;">
-                <p class="text-3xl lg:text-4xl font-normal mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.4s;">미래를 여는 전기화학의 모든 것</p>
+                <p class="text-3xl lg:text-4xl font-normal text-amber-500 mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.4s;">미래를 여는 전기화학의 모든 것</p>
                 <div class="mt-12 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.6s;">
                     <a href="#overview" class="cta-button">
                         강의 내용 살펴보기
@@ -110,20 +171,35 @@
         </header>
 
         <!-- Navigation Bar -->
-        <nav id="navbar" class="w-full bg-transparent absolute top-0 left-0 z-50 transition-all duration-300 py-6">
-            <div class="container mx-auto px-6 flex justify-between items-center">
+        <nav id="navbar" class="w-full bg-transparent fixed top-0 left-0 z-50 transition-all duration-300">
+            <div class="container mx-auto px-6 flex justify-between items-center py-6">
                 <div class="text-2xl font-bold text-white transition-colors duration-300">전기화학학교</div>
-                <div class="flex gap-8">
+                <!-- 데스크톱 메뉴 -->
+                <div class="desktop-menu flex gap-8">
                     <a href="#overview" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">수업 개요</a>
                     <a href="#dates" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">수업 일자</a>
                     <a href="#program" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강의 프로그램</a>
                     <a href="#quiz" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">질문지 작성</a>
                     <a href="#instructors" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강사진</a>
                 </div>
+                <!-- 햄버거 메뉴 아이콘 (모바일에서만 표시) -->
+                <button class="hamburger-menu text-white text-2xl focus:outline-none" aria-label="Toggle navigation" id="hamburger-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- 모바일 메뉴 -->
+            <div class="mobile-menu" id="mobile-menu">
+                <a href="#overview">수업 개요</a>
+                <a href="#dates">수업 일자</a>
+                <a href="#program">강의 프로그램</a>
+                <a href="#quiz">질문지 작성</a>
+                <a href="#instructors">강사진</a>
             </div>
         </nav>
 
         <main class="flex-grow w-full max-w-7xl mx-auto px-6 py-24">
+            <!-- Fixed Navbar 때문에 content가 navbar 아래로 가려지지 않도록 padding-top 추가 -->
+            <div class="pt-24 md:pt-16"></div> 
 
             <!-- 수업 개요 Section -->
             <section id="overview" class="mb-32 opacity-0 animate-fade-in-on-scroll">
@@ -140,10 +216,11 @@
                             좋은 질문을 해주시면 정확하고 유익한 답변을 통해 접속자 모두가 함께 지식을 나눌 수 있을 것 입니다. 많은 참여 기대합니다.
                         </p>
                     </div>
-                    <div class="flex flex-col gap-10">
-                        <img src="intro_1.png" alt="강의실 모습" class="w-full rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
+                    <!-- 이미지 크기를 w-3/4로 줄이고 mx-auto로 가운데 정렬 -->
+                    <div class="flex flex-col gap-10 items-center">
+                        <img src="intro_1.png" alt="강의실 모습" class="w-3/4 rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
                             onerror="this.src='https://placehold.co/600x400/EEEEEE/333333?text=강의실+모습_Fallback';">
-                        <img src="intro_2.png" alt="학생들과 강사" class="w-full rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
+                        <img src="intro_2.png" alt="학생들과 강사" class="w-3/4 rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
                             onerror="this.src='https://placehold.co/600x400/DDDDDD/333333?text=학생들과+강사_Fallback';">
                     </div>
                 </div>
@@ -365,28 +442,42 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+                // 모바일 메뉴가 열려있으면 닫기
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                }
             });
         });
 
         // Navbar visibility and style change on scroll
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
-            const navLinks = navbar.querySelectorAll('a');
+            const navLinks = navbar.querySelectorAll('.desktop-menu a'); // 데스크톱 메뉴 링크
             const navTitle = navbar.querySelector('div:first-child');
+            const mobileMenuLinks = navbar.querySelectorAll('.mobile-menu a'); // 모바일 메뉴 링크
 
             if (window.scrollY > 100) { // When scrolled down
                 navbar.classList.add('navbar-scrolled');
-                // Change text color to dark
+                // Change text color to dark for desktop and mobile links
                 navLinks.forEach(link => link.classList.replace('text-white', 'text-gray-700'));
+                mobileMenuLinks.forEach(link => link.classList.remove('text-white')); // 모바일 메뉴는 이미 어두운 텍스트
                 navTitle.classList.replace('text-white', 'text-gray-900');
                 navLinks.forEach(link => link.classList.replace('hover:text-blue-300', 'hover:text-blue-600'));
 
+                // 햄버거 메뉴 아이콘 색상 변경
+                document.getElementById('hamburger-button').classList.replace('text-white', 'text-gray-700');
+
             } else { // At the top
                 navbar.classList.remove('navbar-scrolled');
-                // Change text color back to white
+                // Change text color back to white for desktop and mobile links
                 navLinks.forEach(link => link.classList.replace('text-gray-700', 'text-white'));
+                mobileMenuLinks.forEach(link => link.classList.add('text-white')); // 모바일 메뉴도 다시 흰색으로
                 navTitle.classList.replace('text-gray-900', 'text-white');
                 navLinks.forEach(link => link.classList.replace('hover:text-blue-600', 'hover:text-blue-300'));
+
+                // 햄버거 메뉴 아이콘 색상 변경
+                document.getElementById('hamburger-button').classList.replace('text-gray-700', 'text-white');
             }
         });
 
@@ -427,6 +518,12 @@
             heroElements.forEach(element => {
                 element.style.animationPlayState = 'running';
             });
+        });
+
+        // Hamburger menu functionality
+        document.getElementById('hamburger-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('active');
         });
     </script>
 </body>
