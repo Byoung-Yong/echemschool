@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- iOS 웹 앱 호환성 메타 태그 추가 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, address=no, email=no">
     <title>전기화학학교: 미래를 여는 전기화학의 모든 것</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,8 +47,16 @@
         .hero-background {
             background-size: cover; /* 배경 이미지를 요소에 맞게 확대/축소 */
             background-position: center; /* 배경 이미지 중앙 정렬 */
-            background-attachment: fixed; /* 시차 효과(parallax effect) */
+            background-attachment: fixed; /* 시차 효과(parallax effect) - PC용 */
         }
+
+        /* 모바일에서 background-attachment: fixed 속성 제거 */
+        @media (max-width: 768px) {
+            .hero-background {
+                background-attachment: scroll; /* 모바일에서는 고정 대신 스크롤하도록 변경 */
+            }
+        }
+
         .hero-overlay {
             /* 헤더 이미지를 투명하게 만들어 글자가 돋보이게 함 (오버레이 불투명도 60%) */
             background: rgba(0, 0, 0, 0.6); /* 가시성 향상을 위해 조정 */
@@ -66,14 +77,6 @@
                 background: rgba(0, 0, 0, 0.3); /* 모바일에서 투명도 더 낮춤 */
             }
         }
-
-        /* 내비게이션 바 스크롤 효과 (제거됨) */
-        /* .navbar-scrolled {
-            background-color: rgba(0, 0, 0, 0.98);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        } */
 
         /* 콜투액션 버튼 스타일 */
         .cta-button {
@@ -142,10 +145,10 @@
             onerror="this.style.backgroundImage='url(https://placehold.co/1920x1080/000000/FFFFFF?text=Electrochemistry+School+Hero_Fallback)';">
             <div class="absolute inset-0 hero-overlay"></div>
             <div class="container mx-auto px-6 text-center relative z-10">
-                <h1 class="text-7xl lg:text-8xl font-extrabold tracking-tighter mb-8 leading-tight opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.2s;">전기화학학교</h1>
+                <h1 class="text-5xl lg:text-6xl font-extrabold tracking-tighter mb-8 leading-tight opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.2s;">전기화학학교</h1>
                 <!-- 요청에 따라 가로선 추가 -->
                 <hr class="w-56 h-1 bg-amber-500 mx-auto mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.3s;">
-                <p class="text-3xl lg:text-4xl font-normal text-amber-500 mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.4s;">미래를 여는 전기화학의 모든 것</p>
+                <p class="text-1xl lg:text-2xl font-normal text-amber-500 mb-8 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.4s;">미래를 여는 전기화학의 모든 것</p>
                 <div class="mt-12 opacity-0 animate-fade-in-on-scroll" style="animation-delay: 0.6s;">
                     <a href="#overview" class="cta-button">
                         강의 내용 살펴보기
@@ -433,38 +436,6 @@
                 }
             });
         });
-
-        // 스크롤 시 내비게이션 바 효과 제거: 이벤트 리스너 제거
-        // window.addEventListener('scroll', function() {
-        //     const navbar = document.getElementById('navbar');
-        //     const navTitle = navbar.querySelector('div:first-child');
-        //     const hamburgerButton = document.getElementById('hamburger-button');
-
-        //     if (window.scrollY > 100) {
-        //         navbar.classList.add('navbar-scrolled');
-        //         navTitle.classList.replace('text-white', 'text-gray-900');
-        //         navbar.querySelectorAll('.desktop-menu a').forEach(link => {
-        //             link.classList.replace('text-white', 'text-gray-700');
-        //             link.classList.replace('hover:text-blue-300', 'hover:text-blue-600');
-        //         });
-        //         hamburgerButton.classList.replace('text-white', 'text-gray-700');
-        //     } else {
-        //         navbar.classList.remove('navbar-scrolled');
-        //         navTitle.classList.replace('text-gray-900', 'text-white');
-        //         navbar.querySelectorAll('.desktop-menu a').forEach(link => {
-        //             link.classList.replace('text-gray-700', 'text-white');
-        //             link.classList.replace('hover:text-blue-600', 'hover:text-blue-300');
-        //         });
-        //         hamburgerButton.classList.replace('text-gray-700', 'text-white');
-        //     }
-
-        //     const mobileMenu = document.getElementById('mobile-menu');
-        //     if (mobileMenu.classList.contains('active')) {
-        //         navTitle.classList.replace('text-white', 'text-gray-900');
-        //         hamburgerButton.classList.replace('text-white', 'text-gray-700');
-        //     }
-        // });
-
 
         // 섹션 페이드인 애니메이션을 위한 Intersection Observer
         const sections = document.querySelectorAll('section.animate-fade-in-on-scroll');
