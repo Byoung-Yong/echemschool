@@ -531,5 +531,39 @@
             }
         });
     </script>
+    <!-- Supabase (브라우저용) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // ✅ 당신 Supabase 정보
+  const SUPABASE_URL = "https://lakqagfaphsndblcruzl.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxha3FhZ2ZhcGhzbmRibGNydXpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MTI4NTcsImV4cCI6MjA4NTk4ODg1N30._lCgHqfM7RqLTag-gXcYbrpMUtFW_BVDThFYJsocuBo";
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function testInsert() {
+    const { data, error } = await supabase
+      .from("qa_posts")
+      .insert([
+        {
+          title: "테스트 질문",
+          content: "이 글이 저장되면 성공입니다.",
+          email: "test@example.com"
+        }
+      ])
+      .select();
+
+    if (error) {
+      alert("저장 실패: " + error.message);
+      console.error(error);
+      return;
+    }
+    alert("저장 성공! id=" + data[0].id);
+    console.log("saved:", data);
+  }
+</script>
+<button onclick="testInsert()">Supabase 저장 테스트</button>
+
 </body>
 </html>
+
