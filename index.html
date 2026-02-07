@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- iOS 웹 앱 호환성 메타 태그 -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="format-detection" content="telephone=no, address=no, email=no" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- iOS 웹 앱 호환성 메타 태그 추가 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no, address=no, email=no">
+
   <title>전기화학학교: 미래를 여는 전기화학의 모든 것</title>
 
   <!-- Tailwind CSS CDN -->
@@ -64,19 +65,11 @@
       transform: translateY(0);
       display: inline-block;
       text-decoration: none;
-      border: none;
-      cursor: pointer;
     }
     .cta-button:hover {
       background-color: #2b6cb0;
       transform: translateY(-2px);
       box-shadow: 0 4px 15px rgba(49, 130, 206, 0.3);
-    }
-    .cta-button:disabled{
-      opacity: 0.7;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
     }
 
     @keyframes fade-in-up {
@@ -87,6 +80,7 @@
       animation: fade-in-up 0.8s ease-out forwards;
       opacity: 0;
     }
+
     hr { border: none; }
 
     .mobile-menu {
@@ -107,14 +101,12 @@
       text-align: center;
     }
     .mobile-menu.active { display: flex; }
-
-    /* 글쓰기 모달 z-index */
-    #qa-writer-modal { z-index: 9999; }
   </style>
 </head>
 
 <body class="antialiased">
   <div class="min-h-screen flex flex-col">
+
     <!-- 헤더 섹션 (히어로) -->
     <header class="w-full relative py-32 lg:py-40 text-white flex items-center justify-center overflow-hidden hero-background"
       style="background-image: url('image_head.png');"
@@ -141,7 +133,10 @@
           <a href="#dates" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">수업 일자</a>
           <a href="#program" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강의 프로그램</a>
           <a href="#quiz" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">질문지 작성</a>
+          <!-- ✅ 추가: Q&A 페이지 이동 -->
+          <a href="qna.html" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">Q&A</a>
           <a href="#instructors" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">강사진</a>
+          <!-- 기존 webservices → Tools 섹션 id가 webservices라면 그대로 둬도 되지만, 섹션 이름을 Tools로 쓰고 있으니 id를 tools로 통일 추천 -->
           <a href="#tools" class="text-white text-lg font-medium hover:text-blue-300 transition duration-300">Tools</a>
         </div>
 
@@ -157,13 +152,14 @@
         <a href="#dates">수업 일자</a>
         <a href="#program">강의 프로그램</a>
         <a href="#quiz">질문지 작성</a>
+        <!-- ✅ 추가: Q&A 페이지 이동 -->
+        <a href="qna.html">Q&A</a>
         <a href="#instructors">강사진</a>
         <a href="#tools">Tools</a>
       </div>
     </nav>
 
     <main class="flex-grow w-full max-w-7xl mx-auto px-6 py-24">
-      <!-- 고정된 내비게이션 바 때문에 콘텐츠가 가려지지 않도록 -->
       <div class="pt-24 md:pt-16"></div>
 
       <!-- 수업 개요 -->
@@ -179,11 +175,9 @@
           </div>
 
           <div class="flex flex-col gap-10 items-center">
-            <img src="intro_1.png" alt="강의실 모습"
-              class="w-3/4 rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
+            <img src="intro_1.png" alt="강의실 모습" class="w-3/4 rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
               onerror="this.src='https://placehold.co/600x400/EEEEEE/333333?text=강의실+모습_Fallback';">
-            <img src="intro_2.png" alt="학생들과 강사"
-              class="w-3/4 rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
+            <img src="intro_2.png" alt="학생들과 강사" class="w-3/4 rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
               onerror="this.src='https://placehold.co/600x400/DDDDDD/333333?text=학생들과+강사_Fallback';">
           </div>
         </div>
@@ -198,31 +192,21 @@
             <ul class="list-none space-y-4">
               <li class="flex items-center gap-4 text-blue-600 font-medium text-2xl">
                 <span class="text-3xl">🗓️</span>
-                <div>
-                  <span class="text-gray-900">신청 기간:</span>
-                  <span class="font-bold text-blue-700">2025년 12월 15일(월) ~ 16일(화)</span>
-                </div>
+                <div><span class="text-gray-900">신청 기간:</span> <span class="font-bold text-blue-700">2025년 12월 15일(월) ~ 16일(화)</span></div>
               </li>
               <li class="flex items-center gap-4 text-blue-600 font-medium text-2xl">
                 <span class="text-3xl">➡️</span>
-                <div>
-                  <span class="text-gray-900">수업 날짜:</span>
-                  <span class="font-bold text-blue-700">2026년 1월 19일(월) ~ 20일(화)</span>
-                </div>
+                <div><span class="text-gray-900">수업 날짜:</span> <span class="font-bold text-blue-700">2026년 1월 19일(월) ~ 20일(화)</span></div>
               </li>
               <li class="flex items-center gap-4 text-blue-600 font-medium text-2xl">
                 <span class="text-3xl">📍</span>
-                <div>
-                  <span class="text-gray-900">수업 장소:</span>
-                  <span class="font-bold text-blue-700">서울대학교 28동 101호(이전과 동일 장소)</span>
-                </div>
+                <div><span class="text-gray-900">수업 장소:</span> <span class="font-bold text-blue-700">서울대학교 28동 101호(이전과 동일 장소)</span></div>
               </li>
             </ul>
           </div>
 
           <div class="flex justify-center items-center">
-            <img src="2024_09.png" alt="이벤트 포스터"
-              class="w-full rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
+            <img src="2024_09.png" alt="이벤트 포스터" class="w-full rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
               onerror="this.src='https://placehold.co/600x800/AAAAAA/FFFFFF?text=이벤트+포스터_Fallback';">
           </div>
         </div>
@@ -231,59 +215,26 @@
       <!-- 강의 프로그램 -->
       <section id="program" class="mb-32 opacity-0 animate-fade-in-on-scroll">
         <h2 class="section-heading">강의 프로그램</h2>
-
         <div class="grid grid-cols-1 gap-10">
-          <!-- Day 1 -->
           <div class="bg-gray-50 rounded-xl p-10 shadow-lg hover:shadow-xl transition-shadow duration-300">
             <h3 class="text-3xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-4">1일차 Day 1</h3>
             <ul class="list-none space-y-6">
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">01</span>
-                <div><span class="font-semibold text-gray-900">전기화학 입문</span> Introduction to Electrochemistry</div>
-              </li>
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">02</span>
-                <div><span class="font-semibold text-gray-900">전기화학 실험을 위한 기본 준비</span> Cell and Instruments</div>
-              </li>
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">03</span>
-                <div><span class="font-semibold text-gray-900">전위와 반응속도</span> Electrochemical Potential and Kinetics</div>
-              </li>
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">04</span>
-                <div><span class="font-semibold text-gray-900">전기분석법 기초</span> Potential Step Methods</div>
-              </li>
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">05</span>
-                <div><span class="font-semibold text-gray-900">전기분석법 응용 1</span> Potential Sweep Methods (CV)</div>
-              </li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">01</span><div><span class="font-semibold text-gray-900">전기화학 입문</span> Introduction to Electrochemistry</div></li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">02</span><div><span class="font-semibold text-gray-900">전기화학 실험을 위한 기본 준비</span> Cell and Instruments</div></li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">03</span><div><span class="font-semibold text-gray-900">전위와 반응속도</span> Electrochemical Potential and Kinetics</div></li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">04</span><div><span class="font-semibold text-gray-900">전기분석법 기초</span> Potential Step Methods</div></li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">05</span><div><span class="font-semibold text-gray-900">전기분석법 응용 1</span> Potential Sweep Methods (CV)</div></li>
             </ul>
           </div>
 
-          <!-- Day 2 -->
           <div class="bg-gray-50 rounded-xl p-10 shadow-lg hover:shadow-xl transition-shadow duration-300 mt-10">
             <h3 class="text-3xl font-bold text-gray-900 mb-6 border-b border-gray-200 pb-4">2일차 Day 2</h3>
             <ul class="list-none space-y-6">
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">01</span>
-                <div><span class="font-semibold text-gray-900">전기분석법 응용 2</span> Coupled Rxn, IR Drop, Charging</div>
-              </li>
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">02</span>
-                <div><span class="font-semibold text-gray-900">전기분석법 응용 3</span> Rotating Disk Electrode (RDE)</div>
-              </li>
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">03</span>
-                <div><span class="font-semibold text-gray-900">전기분석법 응용 4</span> Electrocatalysis</div>
-              </li>
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">04</span>
-                <div><span class="font-semibold text-gray-900">전기분석법 응용 5</span> Electrochemical Impedance</div>
-              </li>
-              <li class="flex items-start gap-4 text-gray-700 text-lg">
-                <span class="text-blue-500 text-xl font-bold">05</span>
-                <div><span class="font-semibold text-gray-900">이차전지의 전기화학적 이해</span> Electrochemical Aspects of Secondary Batteries</div>
-              </li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">01</span><div><span class="font-semibold text-gray-900">전기분석법 응용 2</span> Coupled Rxn, IR Drop, Charging</div></li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">02</span><div><span class="font-semibold text-gray-900">전기분석법 응용 3</span> Rotating Disk Electrode (RDE)</div></li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">03</span><div><span class="font-semibold text-gray-900">전기분석법 응용 4</span> Electrocatalysis</div></li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">04</span><div><span class="font-semibold text-gray-900">전기분석법 응용 5</span> Electrochemical Impedance</div></li>
+              <li class="flex items-start gap-4 text-gray-700 text-lg"><span class="text-blue-500 text-xl font-bold">05</span><div><span class="font-semibold text-gray-900">이차전지의 전기화학적 이해</span> Electrochemical Aspects of Secondary Batteries</div></li>
             </ul>
           </div>
         </div>
@@ -301,15 +252,16 @@
             청중 대다수가 함께 이해하고 공감할 만한 주제에 대한 질문이면 좋겠습니다.
           </p>
 
-          <!-- ✅ 글 작성 버튼 -->
-          <button type="button" class="cta-button" onclick="window.openWriter()">
-            질문 작성하기
-          </button>
+          <!-- ✅ 변경: 게시판 페이지(qna.html)로 이동 -->
+          <a href="qna.html" class="cta-button">
+            질문 게시판으로 이동
+          </a>
 
           <p class="text-sm text-gray-500 mt-4">
-            작성하신 내용은 모두 공개됩니다. 개인정보/민감정보는 적지 마세요.
+            작성된 내용은 모두 공개됩니다. 개인정보/민감정보는 적지 마세요.
           </p>
 
+          <!-- (원하면 유지) 기존 구글폼 링크 -->
           <div class="mt-10">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdnTjF4I4ii_F4uqHVAv90Z0HlPTDVmNIWOPBcwYPK9aCwX-Q/viewform"
               target="_blank" class="cta-button">
@@ -323,12 +275,7 @@
           <ul class="list-disc list-inside text-lg space-y-4 text-gray-700">
             <li>전극 물질의 workfunction 의 함수로 알려져 있는 potential of zero charge (PZC)와 open circuit potential 사이의 상관관계에 대해 알고 싶습니다.</li>
             <li>EIS측정 시, 반원이 매끄럽지 않고 타원의 형태로 나오는 이유와 개선법이 궁금합니다. 그리고 반원 시작점이 용액저항을, 반원의 지름이 전자전달저항을 의미하듯, Warburg는 그래프 상에서 어떤 의미를 갖는지 알고 싶습니다.</li>
-            <li>현재 리튬 전지의 분리막에 관한 연구를 진행중입니다. (중략)
-              <ul class="list-decimal list-inside mt-3 space-y-2 pl-6">
-                <li>Li|Li cell에서 전극 면적은 한개의 Li 만 고려해서 대입하면 되는지</li>
-                <li>다공성 분리막 두께를 무엇으로 넣는 게 적절한지</li>
-              </ul>
-            </li>
+            <li>현재 리튬 전지의 분리막에 관한 연구를 진행중입니다. (중략)</li>
             <li>재현성을 바로 잡을 디테일한 테크닉을 알고 싶습니다.</li>
             <li>기타 전기화학학교에 바라는 점이나 제안하고 싶은 점이 있다면 자유롭게 기재해 주세요.</li>
           </ul>
@@ -338,7 +285,6 @@
       <!-- 강사진 -->
       <section id="instructors" class="mb-32 opacity-0 animate-fade-in-on-scroll">
         <h2 class="section-heading">강사진</h2>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
             <img src="prof1.png" alt="정택동 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
@@ -346,35 +292,30 @@
             <h3 class="text-3xl font-bold text-gray-900 mb-2">정택동</h3>
             <p class="text-center text-gray-700 text-lg">서울대학교 화학부 교수</p>
           </div>
-
           <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
             <img src="prof2.png" alt="양해식 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
               onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사2_Fallback';">
             <h3 class="text-3xl font-bold text-gray-900 mb-2">양해식</h3>
             <p class="text-center text-gray-700 text-lg">부산대학교 화학과 교수</p>
           </div>
-
           <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
             <img src="prof3.png" alt="김종원 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
               onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사3_Fallback';">
             <h3 class="text-3xl font-bold text-gray-900 mb-2">김종원</h3>
             <p class="text-center text-gray-700 text-lg">충북대학교 화학과 교수</p>
           </div>
-
           <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
             <img src="prof4.png" alt="이호춘 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
               onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사4_Fallback';">
             <h3 class="text-3xl font-bold text-gray-900 mb-2">이호춘</h3>
             <p class="text-center text-gray-700 text-lg">DGIST 에너지공학과 교수</p>
           </div>
-
           <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
             <img src="prof5.png" alt="장병용 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
               onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사5_Fallback';">
             <h3 class="text-3xl font-bold text-gray-900 mb-2">장병용</h3>
             <p class="text-center text-gray-700 text-lg">부경대학교 화학과 교수</p>
           </div>
-
           <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
             <img src="prof6.png" alt="황성필 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
               onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사6_Fallback';">
@@ -387,7 +328,6 @@
       <!-- Tools (기존 웹서비스) -->
       <section id="tools" class="mb-32 opacity-0 animate-fade-in-on-scroll">
         <h2 class="section-heading">Tools</h2>
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <a href="https://cvsim.echemschool.com/" target="_blank" class="group block h-full">
             <div class="h-full bg-white border border-gray-100 rounded-xl p-8 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center">
@@ -414,6 +354,7 @@
           </a>
         </div>
       </section>
+
     </main>
 
     <!-- 푸터 -->
@@ -425,73 +366,12 @@
     </footer>
   </div>
 
-  <!-- ✅ 글 작성 모달(팝업) -->
-  <div id="qa-writer-modal" class="fixed inset-0 hidden items-center justify-center">
-    <!-- 배경 -->
-    <div class="absolute inset-0 bg-black/60" onclick="window.closeWriter()"></div>
-
-    <!-- 카드 -->
-    <div class="relative w-[92%] max-w-2xl bg-white rounded-2xl shadow-2xl p-6 md:p-8">
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <h3 class="text-2xl font-extrabold text-gray-900">질문 작성</h3>
-          <p class="text-sm text-gray-600 mt-1">
-            작성하신 내용은 <span class="font-semibold text-red-600">모두에게 공개</span>됩니다. 개인정보/민감정보는 적지 마세요.
-          </p>
-        </div>
-        <button type="button" class="text-gray-500 hover:text-gray-800 text-2xl leading-none" onclick="window.closeWriter()">×</button>
-      </div>
-
-      <div class="mt-6 space-y-4">
-        <div>
-          <label class="block text-sm font-semibold text-gray-800 mb-2">이메일 (본인 확인용)</label>
-          <input id="qa-email" type="email" placeholder="you@example.com"
-            class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-gray-800 mb-2">제목</label>
-          <input id="qa-title" type="text" placeholder="질문 제목을 입력하세요"
-            class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-gray-800 mb-2">내용</label>
-          <textarea id="qa-content" rows="6" placeholder="가능한 구체적으로 작성해 주세요"
-            class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
-        </div>
-
-        <div class="text-xs text-gray-500">
-          * 이미지 업로드 기능은 다음 단계에서 추가합니다.
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-3 sm:justify-end pt-2">
-          <button type="button"
-            class="px-5 py-3 rounded-xl border border-gray-300 font-semibold text-gray-700 hover:bg-gray-50"
-            onclick="window.closeWriter()">
-            닫기
-          </button>
-
-          <button id="qa-save-btn" type="button"
-            class="px-5 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700"
-            onclick="window.savePost()">
-            저장하기
-          </button>
-        </div>
-
-        <div id="qa-status" class="text-sm mt-2"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- (1) 사이트 기본 스크립트 -->
   <script>
     // 내비게이션 바 부드러운 스크롤
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-
         const mobileMenu = document.getElementById('mobile-menu');
         if (mobileMenu.classList.contains('active')) mobileMenu.classList.remove('active');
       });
@@ -525,7 +405,7 @@
       heroElements.forEach(element => { element.style.animationPlayState = 'running'; });
     });
 
-    // 햄버거 메뉴
+    // 햄버거 메뉴 기능
     document.getElementById('hamburger-button').addEventListener('click', function() {
       const mobileMenu = document.getElementById('mobile-menu');
       mobileMenu.classList.toggle('active');
@@ -541,89 +421,6 @@
         hamburgerButton.classList.replace('text-gray-700', 'text-white');
       }
     });
-  </script>
-
-  <!-- (2) Supabase 라이브러리 -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- (3) 글작성/저장 로직 -->
-  <script>
-    const SUPABASE_URL = "https://lakqagfaphsndblcruzl.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxha3FhZ2ZhcGhzbmRibGNydXpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MTI4NTcsImV4cCI6MjA4NTk4ODg1N30._lCgHqfM7RqLTag-gXcYbrpMUtFW_BVDThFYJsocuBo";
-
-    // ✅ 중요: 변수명 중복 방지
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    window.openWriter = function () {
-      const modal = document.getElementById("qa-writer-modal");
-      modal.classList.remove("hidden");
-      modal.classList.add("flex");
-      setStatus("", false);
-    };
-
-    window.closeWriter = function () {
-      const modal = document.getElementById("qa-writer-modal");
-      modal.classList.add("hidden");
-      modal.classList.remove("flex");
-    };
-
-    function setStatus(msg, isError) {
-      const el = document.getElementById("qa-status");
-      el.textContent = msg;
-      el.className = "text-sm mt-2 " + (isError ? "text-red-600" : "text-green-700");
-      if (!msg) el.className = "text-sm mt-2";
-    }
-
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    window.savePost = async function () {
-      const email = document.getElementById("qa-email").value.trim();
-      const title = document.getElementById("qa-title").value.trim();
-      const content = document.getElementById("qa-content").value.trim();
-
-      if (!email || !isValidEmail(email)) {
-        setStatus("이메일을 올바르게 입력해 주세요.", true);
-        return;
-      }
-      if (!title || title.length < 2) {
-        setStatus("제목을 2글자 이상 입력해 주세요.", true);
-        return;
-      }
-      if (!content || content.length < 5) {
-        setStatus("내용을 5글자 이상 입력해 주세요.", true);
-        return;
-      }
-
-      const btn = document.getElementById("qa-save-btn");
-      btn.disabled = true;
-      btn.textContent = "저장 중...";
-
-      try {
-        const { data, error } = await supabaseClient
-          .from("qa_posts")
-          .insert([{ email, title, content }])
-          .select();
-
-        if (error) {
-          console.error("[QA] insert error", error);
-          setStatus("저장 실패: " + error.message, true);
-          return;
-        }
-
-        setStatus("저장 성공! 감사합니다. (id=" + (data && data[0] ? data[0].id : "?") + ")", false);
-
-        document.getElementById("qa-title").value = "";
-        document.getElementById("qa-content").value = "";
-      } catch (e) {
-        console.error("[QA] exception", e);
-        setStatus("예외 발생: " + e.message, true);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = "저장하기";
-      }
-    };
   </script>
 </body>
 </html>
