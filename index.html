@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- iOS 웹 앱 호환성 메타 태그 추가 -->
+  <!-- iOS 웹 앱 호환성 메타 태그 -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="format-detection" content="telephone=no, address=no, email=no" />
   <title>전기화학학교: 미래를 여는 전기화학의 모든 것</title>
@@ -63,11 +63,20 @@
       transition: all 0.3s ease;
       transform: translateY(0);
       display: inline-block;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
     }
     .cta-button:hover {
       background-color: #2b6cb0;
       transform: translateY(-2px);
       box-shadow: 0 4px 15px rgba(49, 130, 206, 0.3);
+    }
+    .cta-button:disabled{
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
     }
 
     @keyframes fade-in-up {
@@ -98,6 +107,9 @@
       text-align: center;
     }
     .mobile-menu.active { display: flex; }
+
+    /* 글쓰기 모달 z-index */
+    #qa-writer-modal { z-index: 9999; }
   </style>
 </head>
 
@@ -289,13 +301,13 @@
             청중 대다수가 함께 이해하고 공감할 만한 주제에 대한 질문이면 좋겠습니다.
           </p>
 
-          <!-- ✅ 테스트 버튼: 무조건 alert -->
-          <button type="button" class="cta-button" onclick="window.testInsert()">
-            Supabase 저장 테스트
+          <!-- ✅ 글 작성 버튼 -->
+          <button type="button" class="cta-button" onclick="window.openWriter()">
+            질문 작성하기
           </button>
 
           <p class="text-sm text-gray-500 mt-4">
-            목표: 버튼을 누르면 "성공/실패 alert"가 반드시 뜹니다. (DB 저장은 다음 단계)
+            작성하신 내용은 모두 공개됩니다. 개인정보/민감정보는 적지 마세요.
           </p>
 
           <div class="mt-10">
@@ -413,6 +425,65 @@
     </footer>
   </div>
 
+  <!-- ✅ 글 작성 모달(팝업) -->
+  <div id="qa-writer-modal" class="fixed inset-0 hidden items-center justify-center">
+    <!-- 배경 -->
+    <div class="absolute inset-0 bg-black/60" onclick="window.closeWriter()"></div>
+
+    <!-- 카드 -->
+    <div class="relative w-[92%] max-w-2xl bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h3 class="text-2xl font-extrabold text-gray-900">질문 작성</h3>
+          <p class="text-sm text-gray-600 mt-1">
+            작성하신 내용은 <span class="font-semibold text-red-600">모두에게 공개</span>됩니다. 개인정보/민감정보는 적지 마세요.
+          </p>
+        </div>
+        <button type="button" class="text-gray-500 hover:text-gray-800 text-2xl leading-none" onclick="window.closeWriter()">×</button>
+      </div>
+
+      <div class="mt-6 space-y-4">
+        <div>
+          <label class="block text-sm font-semibold text-gray-800 mb-2">이메일 (본인 확인용)</label>
+          <input id="qa-email" type="email" placeholder="you@example.com"
+            class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-800 mb-2">제목</label>
+          <input id="qa-title" type="text" placeholder="질문 제목을 입력하세요"
+            class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-800 mb-2">내용</label>
+          <textarea id="qa-content" rows="6" placeholder="가능한 구체적으로 작성해 주세요"
+            class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
+        </div>
+
+        <div class="text-xs text-gray-500">
+          * 이미지 업로드 기능은 다음 단계에서 추가합니다.
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 sm:justify-end pt-2">
+          <button type="button"
+            class="px-5 py-3 rounded-xl border border-gray-300 font-semibold text-gray-700 hover:bg-gray-50"
+            onclick="window.closeWriter()">
+            닫기
+          </button>
+
+          <button id="qa-save-btn" type="button"
+            class="px-5 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700"
+            onclick="window.savePost()">
+            저장하기
+          </button>
+        </div>
+
+        <div id="qa-status" class="text-sm mt-2"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- (1) 사이트 기본 스크립트 -->
   <script>
     // 내비게이션 바 부드러운 스크롤
@@ -420,6 +491,7 @@
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+
         const mobileMenu = document.getElementById('mobile-menu');
         if (mobileMenu.classList.contains('active')) mobileMenu.classList.remove('active');
       });
@@ -453,7 +525,7 @@
       heroElements.forEach(element => { element.style.animationPlayState = 'running'; });
     });
 
-    // 햄버거 메뉴 기능
+    // 햄버거 메뉴
     document.getElementById('hamburger-button').addEventListener('click', function() {
       const mobileMenu = document.getElementById('mobile-menu');
       mobileMenu.classList.toggle('active');
@@ -471,47 +543,87 @@
     });
   </script>
 
-  <!-- (2) Supabase 라이브러리 (1번만) -->
+  <!-- (2) Supabase 라이브러리 -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- (3) 테스트 버튼 동작: "무조건 alert" + 중복 선언 방지 -->
+  <!-- (3) 글작성/저장 로직 -->
   <script>
-    // ✅ 중복 선언 방지 플래그
-    if (!window.__QA_TEST_READY__) {
-      window.__QA_TEST_READY__ = true;
+    const SUPABASE_URL = "https://lakqagfaphsndblcruzl.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxha3FhZ2ZhcGhzbmRibGNydXpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MTI4NTcsImV4cCI6MjA4NTk4ODg1N30._lCgHqfM7RqLTag-gXcYbrpMUtFW_BVDThFYJsocuBo";
 
-      // ✅ 전역 함수: 버튼 onclick에서 호출
-      window.testInsert = function () {
-        // 1) 클릭 반응은 무조건
-        alert("✅ 버튼 클릭 OK! (이 alert가 뜨면 1차 성공)");
+    // ✅ 중요: 변수명 중복 방지
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // 2) Supabase 로드 여부 확인
-        if (!window.supabase) {
-          alert("❌ 실패: Supabase 라이브러리(window.supabase)가 로드되지 않았습니다.");
+    window.openWriter = function () {
+      const modal = document.getElementById("qa-writer-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      setStatus("", false);
+    };
+
+    window.closeWriter = function () {
+      const modal = document.getElementById("qa-writer-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    };
+
+    function setStatus(msg, isError) {
+      const el = document.getElementById("qa-status");
+      el.textContent = msg;
+      el.className = "text-sm mt-2 " + (isError ? "text-red-600" : "text-green-700");
+      if (!msg) el.className = "text-sm mt-2";
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    window.savePost = async function () {
+      const email = document.getElementById("qa-email").value.trim();
+      const title = document.getElementById("qa-title").value.trim();
+      const content = document.getElementById("qa-content").value.trim();
+
+      if (!email || !isValidEmail(email)) {
+        setStatus("이메일을 올바르게 입력해 주세요.", true);
+        return;
+      }
+      if (!title || title.length < 2) {
+        setStatus("제목을 2글자 이상 입력해 주세요.", true);
+        return;
+      }
+      if (!content || content.length < 5) {
+        setStatus("내용을 5글자 이상 입력해 주세요.", true);
+        return;
+      }
+
+      const btn = document.getElementById("qa-save-btn");
+      btn.disabled = true;
+      btn.textContent = "저장 중...";
+
+      try {
+        const { data, error } = await supabaseClient
+          .from("qa_posts")
+          .insert([{ email, title, content }])
+          .select();
+
+        if (error) {
+          console.error("[QA] insert error", error);
+          setStatus("저장 실패: " + error.message, true);
           return;
         }
 
-        // 3) client 생성만 해보기 (DB 저장 X)
-        try {
-          const SUPABASE_URL = "https://lakqagfaphsndblcruzl.supabase.co";
-          const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxha3FhZ2ZhcGhzbmRibGNydXpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MTI4NTcsImV4cCI6MjA4NTk4ODg1N30._lCgHqfM7RqLTag-gXcYbrpMUtFW_BVDThFYJsocuBo";
+        setStatus("저장 성공! 감사합니다. (id=" + (data && data[0] ? data[0].id : "?") + ")", false);
 
-          // ✅ 변수명 중복 방지: supabaseClient (절대 const supabase = ... 하지 않음)
-          const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-          if (supabaseClient) {
-            alert("✅ 성공: Supabase client 생성까지 OK! (DB 저장은 아직 안 함)");
-          } else {
-            alert("❌ 실패: Supabase client 생성에 실패했습니다.");
-          }
-        } catch (e) {
-          alert("❌ 실패: 예외 발생 - " + e.message);
-          console.error(e);
-        }
-      };
-
-      console.log("[QA] ready:", typeof window.testInsert);
-    }
+        document.getElementById("qa-title").value = "";
+        document.getElementById("qa-content").value = "";
+      } catch (e) {
+        console.error("[QA] exception", e);
+        setStatus("예외 발생: " + e.message, true);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "저장하기";
+      }
+    };
   </script>
 </body>
 </html>
