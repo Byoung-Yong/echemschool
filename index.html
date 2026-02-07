@@ -41,46 +41,31 @@
 
         /* 히어로 섹션 배경 이미지 및 오버레이 */
         header {
-            /* 이미지가 로드되지 않을 경우를 대비한 대체 배경색 (검정색) */
             background-color: #000000;
         }
         .hero-background {
-            background-size: cover; /* 배경 이미지를 요소에 맞게 확대/축소 */
-            background-position: center; /* 배경 이미지 중앙 정렬 */
-            background-attachment: fixed; /* 시차 효과(parallax effect) - PC용 */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
-        /* 모바일에서 background-attachment: fixed 속성 제거 */
         @media (max-width: 768px) {
-            .hero-background {
-                background-attachment: scroll; /* 모바일에서는 고정 대신 스크롤하도록 변경 */
-            }
+            .hero-background { background-attachment: scroll; }
         }
 
         .hero-overlay {
-            /* 헤더 이미지를 투명하게 만들어 글자가 돋보이게 함 (오버레이 불투명도 60%) */
-            background: rgba(0, 0, 0, 0.6); /* 가시성 향상을 위해 조정 */
+            background: rgba(0, 0, 0, 0.6);
         }
-        /* 모바일 헤더 높이 및 오버레이 투명도 조정 */
         @media (max-width: 768px) {
-            header {
-                padding-top: 4rem;
-                padding-bottom: 4rem;
-            }
-            header h1 {
-                font-size: 3.5rem;
-            }
-            header p {
-                font-size: 1.5rem;
-            }
-            .hero-overlay {
-                background: rgba(0, 0, 0, 0.3);
-            }
+            header { padding-top: 4rem; padding-bottom: 4rem; }
+            header h1 { font-size: 3.5rem; }
+            header p { font-size: 1.5rem; }
+            .hero-overlay { background: rgba(0, 0, 0, 0.3); }
         }
 
         /* 콜투액션 버튼 스타일 */
         .cta-button {
-            background-color: #3182CE; /* blue-500 */
+            background-color: #3182CE;
             color: white;
             font-weight: 600;
             padding: 1.25rem 2.5rem;
@@ -107,7 +92,7 @@
 
         hr { border: none; }
 
-        /* 모바일 메뉴 스타일 (숨김 처리) */
+        /* 모바일 메뉴 스타일 */
         .mobile-menu {
             display: none;
             flex-direction: column;
@@ -220,7 +205,7 @@
                     </div>
                     <div class="flex justify-center items-center">
                         <img src="2024_09.png" alt="이벤트 포스터" class="w-full rounded-lg shadow-xl hover:scale-[1.005] transition-transform duration-300"
-                            onerror="this.src='https://placehold.co/600x800/AAAAAA/FFFFFF?text=이벤트+포스터_Fallback';">
+                            onerror="this.src='https://placehold.co/600x800/AAAAAA/FFFFFF?text=이벤트+포스터_Fallback)';">
                     </div>
                 </div>
             </section>
@@ -264,10 +249,8 @@
                         청중 대다수가 함께 이해하고 공감할 만한 주제에 대한 질문이면 좋겠습니다.
                     </p>
 
-                    <!-- ✅ 테스트 버튼을 여기로 이동 (확실히 보이게) -->
-                    <button type="button"
-                        class="cta-button"
-                        onclick="window.testInsert()">
+                    <!-- ✅ 테스트 버튼 -->
+                    <button type="button" class="cta-button" onclick="window.testInsert()">
                         Supabase 저장 테스트
                     </button>
 
@@ -304,6 +287,7 @@
             <section id="instructors" class="mb-32 opacity-0 animate-fade-in-on-scroll">
                 <h2 class="section-heading">강사진</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+                    <!-- (중략: 강사진 카드들 동일) -->
                     <div class="flex flex-col items-center p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="prof1.png" alt="정택동 강사 사진" class="w-48 h-48 rounded-full object-cover mb-6 border-4 border-blue-100 shadow-md"
                             onerror="this.src='https://placehold.co/192x192/CCCCCC/333333?text=강사1_Fallback';">
