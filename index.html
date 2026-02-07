@@ -439,37 +439,56 @@
     </script>
 
     <!-- ✅ Supabase (브라우저용) -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <script>
-      const SUPABASE_URL = "https://lakqagfaphsndblcruzl.supabase.co";
-      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxha3FhZ2ZhcGhzbmRibGNydXpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MTI4NTcsImV4cCI6MjA4NTk4ODg1N30._lCgHqfM7RqLTag-gXcYbrpMUtFW_BVDThFYJsocuBo";
+<script>
+  // ✅ 클릭이 되는지부터 확인하기 위한 디버그 버전
+  console.log("[QA] script loaded");
 
-      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const SUPABASE_URL = "https://lakqagfaphsndblcruzl.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxha3FhZ2ZhcGhzbmRibGNydXpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MTI4NTcsImV4cCI6MjA4NTk4ODg1N30._lCgHqfM7RqLTag-gXcYbrpMUtFW_BVDThFYJsocuBo";
 
-      // ✅ onclick에서 확실히 호출되도록 전역에 붙임
-      window.testInsert = async function () {
-        try {
-          const { error } = await supabase
-            .from("qa_posts")
-            .insert([{
-              title: "테스트 질문",
-              content: "이 글이 저장되면 성공입니다.",
-              email: "test@example.com"
-            }]);
+  // jsdelivr에서 로딩 실패하면 여기서 막힐 수 있어서 체크
+  if (!window.supabase) {
+    alert("Supabase 라이브러리가 로드되지 않았습니다. (CDN 문제)");
+    throw new Error("Supabase CDN not loaded");
+  }
 
-          if (error) {
-            alert("저장 실패: " + error.message);
-            console.error(error);
-            return;
-          }
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-          alert("저장 성공! (Supabase Table Editor에서 qa_posts 확인해보세요)");
-        } catch (e) {
-          alert("예외 발생: " + e.message);
-          console.error(e);
-        }
-      };
-    </script>
+  // ✅ 전역 함수로 등록 (onclick이 확실히 찾게)
+  window.testInsert = async function () {
+    alert("버튼 클릭됨! (지금부터 DB 저장 시도)");
+
+    try {
+      const { data, error } = await supabase
+        .from("qa_posts")
+        .insert([{ title: "테스트", content: "저장 확인", email: "test@example.com" }])
+        .select(); // <- 결과를 받아와서 확실히 확인
+
+      if (error) {
+        alert("저장 실패(에러): " + error.message);
+        console.error("[QA] insert error", error);
+        return;
+      }
+
+      alert("저장 성공! id=" + (data && data[0] ? data[0].id : "(id 없음)"));
+      console.log("[QA] insert ok", data);
+    } catch (e) {
+      alert("예외 발생: " + e.message);
+      console.error("[QA] exception", e);
+    }
+  };
+
+  // ✅ 버튼이 없는 경우를 대비해 페이지 로드 시 확인
+  window.addEventListener("load", () => {
+    console.log("[QA] page loaded, testInsert exists?", typeof window.testInsert);
+  });
+</script>
+<button type="button" class="cta-button" onclick="window.testInsert()">
+  Supabase 저장 테스트
+</button>
+
 </body>
 </html>
+
